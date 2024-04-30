@@ -20,7 +20,7 @@ export default async function SignPage({
   console.log("page providers:: ", providers);
 
   return (
-    <session className="flex justify-center mt-[30%]">
+    <session className="flex justify-center mt-24">
       <Signin providers={providers} callbackUrl={callbackUrl ?? "/"} />
     </session>
   );
