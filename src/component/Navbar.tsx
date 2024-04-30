@@ -12,6 +12,7 @@ import {
 
 import { usePathname } from "next/navigation";
 import ColorButton from "./ui/ColorButton";
+import { useSession, signIn, signOut } from "next-auth/react";
 
 const menu = [
   {
@@ -32,13 +33,15 @@ const menu = [
 ];
 export default function Navbar() {
   const pathName = usePathname();
+  const { data: session } = useSession();
+  console.log("session:", session);
   return (
-    <div className="flex justify-between items-center">
+    <div className="flex justify-between items-center px-6">
       <Link href={"/"}>
         <h1 className="text-3xl font-bold">Instagram</h1>
       </Link>
       <nav>
-        <ul className="flex gap-4 items-center p-4 px-6">
+        <ul className="flex gap-4 items-center p-4 ">
           {menu.map(
             (
               { href, icon, clickedIcon } // destructureで直感的に実装
@@ -50,7 +53,11 @@ export default function Navbar() {
               </li>
             )
           )}
-          <ColorButton text="Sign in" onClick={() => {}} />
+          {session ? (
+            <ColorButton text="Sign Out" onClick={() => signOut()} />
+          ) : (
+            <ColorButton text="Sign in" onClick={() => signIn()} />
+          )}
         </ul>
       </nav>
     </div>
