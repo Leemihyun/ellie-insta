@@ -8,6 +8,12 @@ import { authOptions } from "@/pages/api/auth/[...nextauth]";
 import Signin from "@/component/Signin";
 import { redirect } from "next/navigation";
 
+type Props = {
+  searchParams: {
+    callbackUrl: string;
+  };
+};
+
 export default async function SignPage({
   searchParams: { callbackUrl },
 }: Props) {
@@ -20,8 +26,8 @@ export default async function SignPage({
   console.log("page providers:: ", providers);
 
   return (
-    <session className="flex justify-center mt-24">
+    <section className="flex justify-center mt-24">
       <Signin providers={providers} callbackUrl={callbackUrl ?? "/"} />
-    </session>
+    </section>
   );
 }
